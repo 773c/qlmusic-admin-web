@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!--搜索框-->
     <el-card class="filter-container" shadow="never">
       <div>
         <i class="el-icon-search"></i>
@@ -77,6 +78,7 @@
         </el-form>
       </div>
     </el-card>
+    <!--数据内容-->
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
       <span> 数据列表</span>
@@ -100,7 +102,7 @@
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="歌手头像" width="100" align="center">
-          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.pic"></template>
+          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.headIcon"></template>
         </el-table-column>
         <el-table-column label="歌手姓名" width="160" align="center">
           <template slot-scope="scope">
@@ -160,6 +162,7 @@
         </el-table-column>
       </el-table>
     </div>
+    <!--分页-->
     <div class="pagination-container">
       <el-pagination
         background
@@ -206,7 +209,6 @@
         list: null,
         total: null,
         listLoading: false,
-        selectProductCateValue: null,
         multipleSelection: [],
         productCateOptions: [],
         languageOptions: [

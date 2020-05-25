@@ -57,6 +57,7 @@
         }
       };
       return {
+        src:'@/assets/img/admin_background.jpg',
         ruleForm: {
           account: 'cjj',
           password: '123',
@@ -107,7 +108,7 @@
 <style scoped>
   .login_container {
     background: url("../../assets/img/admin_background.jpg");
-    height: 100%;
+    height: 721px;
   }
 
   .login_form_layout{

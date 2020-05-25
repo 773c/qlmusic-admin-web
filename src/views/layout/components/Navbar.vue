@@ -2,9 +2,10 @@
   <div>
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <div class="menu-wrapper-button" @click="toggleSideBar()">
-        <img src="@/assets/img/menu.png" width="24" height="24">
+        <img src="@/assets/img/menu.png" :class="isHideSidebar" width="26" height="26">
       </div>
     </el-radio-group>
+    <!--用户-->
     <el-dropdown class="avatar-container" >
       <div class="avatar-wrapper">
         <img class="user-avatar" >
@@ -25,12 +26,28 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: "Navbar",
+    components:{
+
+    },
     data() {
       return {
-        isCollapse: true
+        isCollapse: true,
       };
+    },
+    computed: {
+      ...mapGetters([
+        'sidebar',
+        'avatar'
+      ]),
+      isHideSidebar(){
+        return {
+          rotateMenu:!this.sidebar.opened
+        }
+      }
     },
     methods:{
       toggleSideBar(){
@@ -64,6 +81,6 @@
     }
   }
 .menu-wrapper-button{
-  margin: 14px;
+  margin: 13px;
 }
 </style>

@@ -8,6 +8,7 @@ const Layout = () => import('@/views/layout/Layout')
 const Login = () => import('@/views/login/index')
 const Home = () => import('@/views/home/index')
 const Author = () => import('@/views/ams/author/index')
+const AddAuthor = () => import('@/views/ams/author/add')
 const AuthorCate = () => import('@/views/ams/authorCate/index')
 
 const constantRouterMap = [
@@ -38,7 +39,7 @@ const constantRouterMap = [
       },
       {
         path:'addAuthor',
-        component:AuthorCate,
+        component:AddAuthor,
         meta:{title:"添加歌手",icon:'tjgs'}
       },
       {

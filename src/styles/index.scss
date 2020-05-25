@@ -61,7 +61,15 @@ a:hover {
 //narbar样式
 .narbar-container{
   border: 1px solid #d3dce6;
+  padding-left: 2px;
   height: 50px;
+}
+
+//menu图标
+.rotateMenu {
+  transform: rotate(90deg);
+  transition: 0.38s;
+  transform-origin: 50% 50%;
 }
 
 //搜索栏样式

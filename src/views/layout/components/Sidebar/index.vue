@@ -1,19 +1,20 @@
 <template>
   <scroll-bar>
     <el-menu
-      default-active="1"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       background-color="#000000"
       text-color="#fff"
       active-text-color="#fe0000"
       :collapse="isCollapse"
     >
-      <sidebar-item></sidebar-item>
+      <sidebar-item :routes="routes"></sidebar-item>
     </el-menu>
   </scroll-bar>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import SidebarItem from './SidebarItem'
   import ScrollBar from '@/components/ScrollBar'
 
@@ -24,21 +25,24 @@
     },
     data() {
       return {
-        isCollapse: false,
+
       };
     },
     computed:{
-
+      ...mapGetters([
+        'sidebar',
+      ]),
+      routes() {
+        return this.$router.options.routes
+      },
+      isCollapse(){
+        return !this.sidebar.opened
+      }
     }
 
   }
 </script>
 
 <style scoped>
-  /*.el-menu-vertical-demo{*/
-  /*min-height: 720px;*/
-  /*}*/
-  /*.el-menu-vertical-demo:not(.el-menu--collapse) {*/
-  /*min-height: 720px;*/
-  /*}*/
+
 </style>

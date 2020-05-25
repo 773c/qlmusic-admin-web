@@ -17,6 +17,7 @@ import store from './store'
 
 Vue.use(ElementUI, { locale })
 
+//true会提示此时为开发模式，false则会关闭这个提示
 Vue.config.productionTip = false
 
 new Vue({
