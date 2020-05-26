@@ -10,7 +10,7 @@
     props: {
       iconClass: {
         type: String,
-        required: false
+        required: true
       },
       className: {
         type: String
@@ -18,7 +18,6 @@
     },
     computed: {
       iconName() {
-        console.log(this.iconClass);
         return `#icon-${this.iconClass}`
       },
       svgClass() {
@@ -34,9 +33,9 @@
 
 <style scoped>
   .svg-icon {
-    width: 1.2em;
-    height: 1.2em;
-    vertical-align: -0.18em;
+    width: 1.4em;
+    height: 1.4em;
+    vertical-align: -0.33em;
     fill: currentColor;
     overflow: hidden;
   }

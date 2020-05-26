@@ -3,7 +3,7 @@
     <el-menu
       :default-active="$route.path"
       class="el-menu-vertical-demo"
-      background-color="#555555"
+      background-color="#000000"
       text-color="#fff"
       active-text-color="#fe0000"
       :collapse="isCollapse"

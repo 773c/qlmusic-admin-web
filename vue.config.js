@@ -1,29 +1,22 @@
 const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, '.', dir)
+}
 module.exports = {
-  devServer: {
-    disableHostCheck: true
-  },
   chainWebpack: config => {
+    config.module.rules.delete("svg"); //重点:删除默认配置中处理svg,
     const svgRule = config.module.rule('svg')
-    // 清除已有的所有 loader。
-    // 如果你不这样做，接下来的 loader 会附加在该规则现有的 loader 之后。
     svgRule.uses.clear()
-    svgRule
+    config.module
+      .rule('svg-sprite-loader')
       .test(/\.svg$/)
-      .include.add(path.resolve(__dirname, './src/icons'))
+      .include
+      .add(resolve('src/icons')) //处理svg目录
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
       .options({
         symbolId: 'icon-[name]'
       })
-    const fileRule = config.module.rule('file')
-    fileRule.uses.clear()
-    fileRule
-      .test(/\.svg$/)
-      .exclude.add(path.resolve(__dirname, './src/icons'))
-      .end()
-      .use('file-loader')
-      .loader('file-loader')
   }
 }
