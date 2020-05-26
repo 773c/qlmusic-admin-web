@@ -2,7 +2,7 @@
   <div>
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <div class="menu-wrapper-button" @click="toggleSideBar()">
-        <img src="@/assets/img/menu.png" :class="isHideSidebar" width="26" height="26">
+        <img src="@/assets/img/menu.png" :class="isHideSidebar" width="26" height="26" />
       </div>
     </el-radio-group>
     <!--用户-->

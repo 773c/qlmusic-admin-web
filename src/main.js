@@ -9,7 +9,7 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 import '@/styles/index.scss'
 
 // import '@/permission'
-// import '@/icons'
+import '@/icons'
 
 import App from './App.vue'
 import router from './router'

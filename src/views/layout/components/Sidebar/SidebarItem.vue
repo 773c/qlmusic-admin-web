@@ -3,7 +3,7 @@
     <router-link to="/">
       <el-menu-item index="/home">
         <div class="el-div">
-          <svg-icon class="el-icon-s-home" width="50"></svg-icon>
+          <svg-icon icon-class="qq" width="50"></svg-icon>
           <span>首页</span>
         </div>
       </el-menu-item>
@@ -11,7 +11,7 @@
 
     <el-submenu index="/ams">
       <template slot="title">
-        <svg-icon class="el-icon-s-custom"></svg-icon>
+        <svg-icon icon-class="qq"></svg-icon>
         <span>歌手</span>
       </template>
       <router-link to="/ams/author">
@@ -29,7 +29,7 @@
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">
-        <svg-icon class="el-icon-service"></svg-icon>
+        <svg-icon icon-class="qq"></svg-icon>
         <span>歌曲</span>
       </template>
 
@@ -40,7 +40,7 @@
     </el-submenu>
     <el-submenu index="4">
       <template slot="title">
-        <svg-icon class="el-icon-news"></svg-icon>
+        <svg-icon icon-class="qq"></svg-icon>
         <span>歌单</span>
       </template>
       <el-menu-item index="4-1">选项1</el-menu-item>
@@ -53,12 +53,9 @@
 </template>
 
 <script>
-  import SvgIcon from '@/components/SvgIcon/index'
+  import '@/icons/svg/qq.svg'
   export default {
     name: "SidebarItem",
-    components:{
-
-    },
     props: {
       routes: {
         type: Array

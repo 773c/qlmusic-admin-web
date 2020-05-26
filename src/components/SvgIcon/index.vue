@@ -10,7 +10,7 @@
     props: {
       iconClass: {
         type: String,
-        required: true
+        required: false
       },
       className: {
         type: String
@@ -18,6 +18,7 @@
     },
     computed: {
       iconName() {
+        console.log(this.iconClass);
         return `#icon-${this.iconClass}`
       },
       svgClass() {
