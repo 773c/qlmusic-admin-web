@@ -29,21 +29,25 @@ const constantRouterMap = [
   },
   {
     path:'/ams',
+    name: 'ams',
     component:Layout,
     meta:{title:"歌手",icon:'gs'},
     children:[
       {
         path:'author',
+        name: 'author',
         component:Author,
         meta:{title:"歌手列表",icon:'gslb'}
       },
       {
         path:'addAuthor',
+        name: 'addAuthor',
         component:AddAuthor,
         meta:{title:"添加歌手",icon:'tjgs'}
       },
       {
         path:'authorCate',
+        name: 'authorCate',
         component:AuthorCate,
         meta:{title:"歌手分类",icon:'gsfl'}
       }

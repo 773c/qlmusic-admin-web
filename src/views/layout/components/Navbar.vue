@@ -2,13 +2,16 @@
   <div>
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <div class="menu-wrapper-button" @click="toggleSideBar()">
-        <img src="@/assets/img/menu.png" :class="isHideSidebar" width="26" height="26" />
+        <img src="@/assets/img/menu.png" :class="isHideSidebar" width="28" height="28"/>
       </div>
+      <breadcrumb class="breadcrumb"></breadcrumb>
     </el-radio-group>
+
+
     <!--用户-->
-    <el-dropdown class="avatar-container" >
+    <el-dropdown class="avatar-container">
       <div class="avatar-wrapper">
-        <img class="user-avatar" >
+        <img class="user-avatar">
         <i class="el-icon-caret-bottom"></i>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
@@ -26,12 +29,13 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import Breadcrumb from '@/components/Breadcrumb'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "Navbar",
-    components:{
-
+    components: {
+      Breadcrumb
     },
     data() {
       return {
@@ -43,14 +47,14 @@
         'sidebar',
         'avatar'
       ]),
-      isHideSidebar(){
+      isHideSidebar() {
         return {
-          rotateMenu:!this.sidebar.opened
+          rotateMenu: !this.sidebar.opened
         }
       }
     },
-    methods:{
-      toggleSideBar(){
+    methods: {
+      toggleSideBar() {
         this.$store.dispatch("ToggleSideBar")
       }
     }
@@ -80,7 +84,15 @@
       }
     }
   }
-.menu-wrapper-button{
-  margin: 13px;
-}
+
+  .menu-wrapper-button {
+    margin: 11px 15px 11px 10px;
+    cursor: pointer;
+    float: left;
+  }
+
+  .breadcrumb {
+    float: left;
+    margin-top: 20px;
+  }
 </style>

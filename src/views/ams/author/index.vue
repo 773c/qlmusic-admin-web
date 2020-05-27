@@ -66,7 +66,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="未知：">
-            <el-select  placeholder="全部" clearable>
+            <el-select placeholder="全部" clearable>
               <el-option
                 v-for="item in verifyStatusOptions"
                 :key="item.value"
@@ -208,7 +208,7 @@
         listQuery: Object.assign({}, defaultListQuery),
         list: null,
         total: null,
-        listLoading: false,
+        listLoading: true,
         multipleSelection: [],
         productCateOptions: [],
         languageOptions: [
@@ -254,10 +254,10 @@
     },
     methods: {
       authorList() {
-        listLoading: true
+        this.listLoading = true
         getAuthorList(this.listQuery).then(response => {
           console.log(response);
-          listLoading: false
+          this.listLoading = false
           this.list = response.data.list
           this.total = response.data.total
         })

@@ -1,73 +1,74 @@
 <template>
-  <div>
-    <el-card class="box-card">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="歌手类型" prop="type">
-          <el-select v-model="value1" multiple placeholder="请选择">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <multi-upload></multi-upload>
-
-      </el-form>
-    </el-card>
-  </div>
+  <el-card class="box-card">
+    <el-steps :active="active" simple finish-status="success">
+      <el-step title="填写歌手信息" icon="el-icon-edit"></el-step>
+      <el-step title="文件上传" icon="el-icon-upload"></el-step>
+    </el-steps>
+    <!--歌手信息-->
+    <author-info-form
+      v-show="showStatus[0]"
+      v-model="addAuthor"
+      @nextStep="nextStep">
+    </author-info-form>
+    <!--上传文件-->
+    <author-upload-form
+      v-show="showStatus[1]"
+      v-model="addAuthor"
+      @prevStep="prevStep"
+      @commit="commit">
+    </author-upload-form>
+  </el-card>
 </template>
 
 <script>
-  import MultiUpload from '@/components/Upload/multiUpload'
+  import AuthorInfoForm from './compoents/authorInfoForm'
+  import AuthorUploadForm from './compoents/authorUploadForm'
 
+  const defaultAddAuthor = {
+    name: null,
+    sex: null,
+    type: [],
+    prefix: null,
+    language: null,
+    description: null,
+  }
   export default {
-    name: "add",
+    name: "addAuthor",
+    components: {
+      AuthorInfoForm,
+      AuthorUploadForm
+    },
     data() {
       return {
-        options: [
-          {
-            value: '选项1',
-            label: '摇滚'
-          }, {
-            value: '选项2',
-            label: '流行'
-          }, {
-            value: '选项3',
-            label: '电子'
-          }, {
-            value: '选项4',
-            label: '民谣'
-          }, {
-            value: '选项5',
-            label: '古典'
-          }, {
-            value: '选项6',
-            label: '说唱'
-          }, {
-            value: '选项7',
-            label: '布鲁斯'
-          }, {
-            value: '选项8',
-            label: '轻音乐'
-          }, {
-            value: '选项9',
-            label: '雷鬼'
-          }, {
-            value: '选项10',
-            label: '蓝调'
-          }
-        ],
-        value1: [],
+        active: 0,
+        isShow: true,
+        showStatus: [true, false],
+        addAuthor: Object.assign({}, defaultAddAuthor),
       }
     },
-    components: {
-      MultiUpload
-    },
+    computed: {},
     methods: {
-      submitUpload() {
-        this.$refs.upload.submit();
+      hideAll() {
+        for (let i = 0; i < this.showStatus.length; i++) {
+          this.showStatus[i] = false
+        }
+      },
+      prevStep() {
+        if (this.active > 0) {
+          this.active--
+          this.hideAll()
+          this.showStatus[this.active] = true
+        }
+      },
+      nextStep() {
+        if (this.active < this.showStatus.length - 1) {
+          this.active++
+          this.hideAll()
+          this.showStatus[this.active] = true
+        }
+      },
+      commit() {
+        console.log(this.addAuthor);
       },
     }
   }
@@ -76,7 +77,7 @@
 <style scoped>
   .box-card {
     width: 900px;
-    height: 1000px;
     margin: 20px 150px;
+    padding: 30px 70px;
   }
 </style>
