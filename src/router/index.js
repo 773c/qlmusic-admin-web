@@ -14,7 +14,8 @@ const AuthorCate = () => import('@/views/ams/authorCate/index')
 const constantRouterMap = [
   {
     path:'/login',
-    component: Login
+    component: Login,
+    hidden:true
   },
   {
     path: '',

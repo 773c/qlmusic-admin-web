@@ -1,4 +1,4 @@
-import {login,test} from '@/api/login'
+import {login,getInfo,test} from '@/api/login'
 import {getToken,setToken,removeToken} from "@/utils/auth";
 
 const user = {
@@ -23,25 +23,35 @@ const user = {
     }
   },
   actions:{
-    Login(context,userInfo){
+    Login({commit},userInfo){
       const account = userInfo.account.trim()
       return new Promise((resolve , reject) => {
         login(account,userInfo.password).then(response => {
-          console.log(response);
+          console.log(response)
           //获取后台数据
-          const data = response.data;
-          console.log("保存token到Cookie中。。。"+data);
+          const data = response.data
           //保存到Cookie中
           setToken(data)
           //提交到mutations
-          context.commit('SET_TOKEN',data)
+          commit('SET_TOKEN',data)
           resolve()
         }).catch(error => {
           reject(error)
         })
       })
     },
-    Test(context){
+    GetInfo({commit}){
+      return new Promise((resolve , reject) => {
+        getInfo().then(response => {
+          const data = response.data
+          console.log(data);
+          resolve(data)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    Test({commit}){
       return new Promise((resolve , reject) => {
         test().then(response =>{
           console.log(response);

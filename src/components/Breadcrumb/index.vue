@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb separator="/">
-    <el-breadcrumb-item v-for="(item,index) in routeList" :key="item.path">
+    <el-breadcrumb-item v-for="(item,index) in routeList" :key="item.name">
       <router-link :to="item.path">{{item.meta.title}}</router-link>
     </el-breadcrumb-item>
   </el-breadcrumb>
@@ -25,11 +25,9 @@
         let first = matched[0]
         //如果不是首页
         if(first.meta.title!=="首页"){
-          console.log(matched[1]);
           first.path = matched[1].path
           matched = [{path:'/home',meta:{title:'首页'}}].concat(matched)
         }
-        console.log(matched);
         this.routeList = matched
       }
     },

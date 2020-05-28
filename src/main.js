@@ -8,8 +8,8 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 
 import '@/styles/index.scss'
 
-// import '@/permission'
 import '@/icons'
+import '@/permission'
 
 import App from './App.vue'
 import router from './router'
@@ -19,6 +19,8 @@ Vue.use(ElementUI, { locale })
 
 //true会提示此时为开发模式，false则会关闭这个提示
 Vue.config.productionTip = false
+
+
 
 new Vue({
   router,

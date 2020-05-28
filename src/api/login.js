@@ -1,4 +1,4 @@
-import { request } from '@/utils/request'
+import request from '@/utils/request'
 
 export function login(account, password) {
   return request({
@@ -10,7 +10,12 @@ export function login(account, password) {
     }
   })
 }
-
+export function getInfo() {
+  return request({
+    url:'/admin/info',
+    method:'get'
+  })
+}
 export function test() {
   return request({
     url: '/author/getAuthorList',
