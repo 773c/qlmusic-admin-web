@@ -80,7 +80,7 @@
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
             this.$store.dispatch('Login', this.ruleForm).then(() => {
-              alert("登录成功")
+              this.$router.push("/")
             })
           } else {
             alert('error submit!');

@@ -15,7 +15,7 @@
       }
     },
     watch:{
-      $route(){
+      $route(to,from,next){
         this.getRouteList()
       }
     },

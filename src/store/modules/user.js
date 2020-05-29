@@ -45,6 +45,7 @@ const user = {
         getInfo().then(response => {
           const data = response.data
           console.log(data);
+          commit('SET_AVATAR',data.headIcon)
           resolve(data)
         }).catch(error => {
           reject(error)

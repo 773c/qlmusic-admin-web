@@ -38,7 +38,7 @@ const constantRouterMap = [
         path:'author',
         name: 'author',
         component:Author,
-        meta:{title:"歌手列表",icon:'gslb'}
+        meta:{title:"歌手列表",icon:'gslb',isRequestData:true}
       },
       {
         path:'addAuthor',

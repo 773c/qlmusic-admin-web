@@ -18,7 +18,7 @@ import NProgress from 'nprogress'
   //请求拦截
   service.interceptors.request.use(config => {
     //出现进度条
-    // NProgress.start()
+    NProgress.start()
     // console.log("请求拦截store中的token：" + store.getters.token);
     console.log("请求拦截Cookie中的token：" + getToken());
     if (store.getters.token) {
@@ -33,7 +33,7 @@ import NProgress from 'nprogress'
   //响应拦截
   service.interceptors.response.use(response => {
     //隐藏进度条
-    // NProgress.done()
+    NProgress.done()
     const data = response.data
     if(data.statusCode !== 200){
       Message({

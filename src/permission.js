@@ -4,21 +4,26 @@ import 'nprogress/nprogress.css'
 import store from '@/store'
 import {getToken} from '@/utils/auth'
 
+//进度条样式
 NProgress.inc(0.2)
-NProgress.configure({ easing: 'ease', speed: 300, showSpinner: false })
+NProgress.configure({easing: 'ease', speed: 300, showSpinner: false})
 
 const whiteList = ['/login']
-router.beforeEach((to,from,next) => {
-  NProgress.start()
-  if(getToken()){
-    store.dispatch('GetInfo').then(() => {
+router.beforeEach((to, from, next) => {
+  if (getToken()) {
+    if (to.meta.isRequestData) {
       next()
-    }).catch(error => {
-      console.log(error);
-    })
-  }else {
+    }else {
+      NProgress.start()
+      store.dispatch('GetInfo').then(() => {
+        next()
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  } else {
     console.log("getToken已过期");
-    whiteList.indexOf(to.path)!==-1?next():next('/login')
+    whiteList.indexOf(to.path) !== -1 ? next() : next('/login')
   }
 })
 router.afterEach(() => {

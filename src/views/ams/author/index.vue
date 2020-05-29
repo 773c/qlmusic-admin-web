@@ -7,7 +7,7 @@
         <span> 筛选搜索</span>
         <el-button
           style="float: right"
-          @click="handleResetSearch()"
+          @click=""
           type="danger"
           plain
           size="small">
@@ -15,7 +15,7 @@
         </el-button>
         <el-button
           style="float: right;margin-right: 15px"
-          @click="handleSearchList()"
+          @click=""
           type="danger"
           size="small">
           查询结果
@@ -23,7 +23,7 @@
 
       </div>
       <div style="margin-top: 15px">
-        <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
+        <el-form :inline="true" size="small" label-width="140px">
           <el-form-item label="姓名：">
             <el-input style="width: 203px" v-model="listQuery.keyname" placeholder="歌手姓名"></el-input>
           </el-form-item>
@@ -66,7 +66,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="未知：">
-            <el-select placeholder="全部" clearable>
+            <el-select v-model="listQuery.tag" placeholder="全部" clearable>
               <el-option
                 v-for="item in verifyStatusOptions"
                 :key="item.value"
@@ -84,7 +84,7 @@
       <span> 数据列表</span>
       <el-button
         class="btn-add"
-        @click="handleAddProduct()"
+        @click=""
         type="danger"
         plain
         size="mini">
@@ -99,38 +99,38 @@
                 border>
         <el-table-column type="selection" width="60" align="center"></el-table-column>
         <el-table-column label="编号" width="60" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+          <template #default="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="歌手头像" width="100" align="center">
-          <template slot-scope="scope"><img style="height: 80px" :src="scope.row.headIcon"></template>
+          <template #default="scope"><img style="height: 80px" :src="scope.row.headIcon"></template>
         </el-table-column>
         <el-table-column label="歌手姓名" width="160" align="center">
-          <template slot-scope="scope">
+          <template #default="scope">
             <p>{{scope.row.name}}</p>
           </template>
         </el-table-column>
         <el-table-column label="性别" width="70" align="center">
-          <template slot-scope="scope">
+          <template #default="scope">
             <p>{{scope.row.sex}}</p>
           </template>
         </el-table-column>
         <el-table-column label="描述" align="center">
-          <template slot-scope="scope">{{scope.row.description}}</template>
+          <template #default="scope">{{scope.row.description}}</template>
         </el-table-column>
         <el-table-column label="标签" width="160" align="center">
-          <template slot-scope="scope">{{scope.row.tag}}</template>
+          <template #default="scope">{{scope.row.tag}}</template>
         </el-table-column>
         <el-table-column label="首字母" width="70" align="center">
-          <template slot-scope="scope">{{scope.row.prefix}}</template>
+          <template #default="scope">{{scope.row.prefix}}</template>
         </el-table-column>
         <el-table-column label="粉丝数量" width="120" align="center">
-          <template slot-scope="scope">{{scope.row.fansSum}}</template>
+          <template #default="scope">{{scope.row.fansSum}}</template>
         </el-table-column>
         <el-table-column label="语种" width="80" align="center">
-          <template slot-scope="scope">{{scope.row.language}}</template>
+          <template #default="scope">{{scope.row.language}}</template>
         </el-table-column>
         <el-table-column label="操作" width="180" align="center">
-          <template slot-scope="scope">
+          <template #default="scope">
             <p>
               <el-button
                 size="mini"
@@ -189,12 +189,12 @@
     languageId: null,
     sex: null,
     tag: null
-
   };
   export default {
     name: "authorList",
     data() {
       return {
+        value:null,
         editSkuInfo: {
           dialogVisible: false,
           productId: null,
@@ -249,7 +249,8 @@
         }, {
           value: 0,
           label: '未审核'
-        }]
+        }],
+        tagOptions:[]
       }
     },
     methods: {

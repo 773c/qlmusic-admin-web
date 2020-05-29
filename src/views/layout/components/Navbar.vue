@@ -11,7 +11,7 @@
     <!--用户-->
     <el-dropdown class="avatar-container">
       <div class="avatar-wrapper">
-        <img class="user-avatar">
+        <img class="user-avatar" :src="avatar">
         <i class="el-icon-caret-bottom"></i>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
