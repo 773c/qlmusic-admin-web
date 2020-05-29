@@ -1,4 +1,4 @@
-import {login,getInfo,test} from '@/api/login'
+import {login,getInfo,logout,test} from '@/api/login'
 import {getToken,setToken,removeToken} from "@/utils/auth";
 
 const user = {
@@ -47,6 +47,18 @@ const user = {
           console.log(data);
           commit('SET_AVATAR',data.headIcon)
           resolve(data)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    Logout({commit}){
+      return new Promise((resolve,reject) => {
+        logout().then(() => {
+          //因为removeToken()不能动态刷新数据，所以得手动清除state中的token
+          commit('SET_TOKEN','')
+          removeToken()
+          resolve()
         }).catch(error => {
           reject(error)
         })

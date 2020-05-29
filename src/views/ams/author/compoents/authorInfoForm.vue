@@ -1,5 +1,5 @@
 <template>
-  <info-form :model="value" v-model="value"  ref="infoForm" @nextStep="nextStep" style="margin-top: 40px">
+  <info-form :model="value" v-model="value" :rules="rules" ref="infoForm" @nextStep="nextStep" style="margin-top: 40px">
     <template #one>
       <el-form-item label="歌手姓名：" prop="name">
         <el-input type="text" v-model="value.name"></el-input>

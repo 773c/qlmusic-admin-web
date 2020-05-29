@@ -21,7 +21,7 @@
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span @click="" style="display:block;">退出</span>
+          <span @click="logout" style="display:block;">退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -55,7 +55,12 @@
     },
     methods: {
       toggleSideBar() {
-        this.$store.dispatch("ToggleSideBar")
+        this.$store.dispatch('ToggleSideBar')
+      },
+      logout(){
+        this.$store.dispatch('Logout').then(() => {
+          // location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
       }
     }
   }

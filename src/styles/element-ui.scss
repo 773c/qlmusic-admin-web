@@ -15,7 +15,8 @@
 .el-input .el-input__inner:focus {
   border-color: #fe0000;
 }
-.el-textarea .el-textarea__inner:focus{
+
+.el-textarea .el-textarea__inner:focus {
   border-color: #fe0000;
 }
 
@@ -34,7 +35,6 @@
 .el-select .el-input:not(.is-focus) .el-input__inner:focus {
   border-color: #fe0000
 }
-
 
 //表单验证成功样式
 .el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus {
@@ -117,4 +117,10 @@
   position: relative;
   top: 50%;
   left: 45%;
+}
+
+//el-dropdown
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: #fe0000;
+  color: #ffffff
 }
