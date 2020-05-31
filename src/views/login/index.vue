@@ -3,7 +3,7 @@
     <el-card class="login_form_layout" shadow="always">
         <!--logo图标-->
         <div class="logo_box" align="center">
-          <img src="@/assets/img/logo.png" alt="logo图标" height="78" width="78">
+          <img src="@/assets/img/logo.png" alt="logo图标">
           <h3>巧了音乐</h3>
         </div>
         <br>

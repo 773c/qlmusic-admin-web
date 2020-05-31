@@ -124,3 +124,19 @@
   background-color: #fe0000;
   color: #ffffff
 }
+
+//el-pagination
+.el-pagination.is-background .el-pager li:not(.disabled).active{
+  background-color: #fe0000;
+  color: #ffffff;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):not(.active):hover{
+  color: #fe0000;
+}
+
+//el-pagination附加功能（每页显示总数）
+.el-pagination__sizes .el-input .el-input__inner:hover{
+  border-color:#fe0000;
+}
+
+//el-select

@@ -1,18 +1,18 @@
 <template>
   <div>
     <el-upload
-      ref="multiUpload"
+      ref="singleUpload"
       :action="useOss?ossUploadUrl:minioUploadUrl"
       :data="useOss?dataObj:null"
       list-type="picture-card"
       :file-list="fileList"
-      :before-upload="beforeUpload"
+      :before-upload="beforeUploadHandler"
       :on-change="changeHandler"
       :on-remove="removeHandler"
       :on-preview="previewHandler"
       :on-success="uploadSuccessHandler"
       :on-exceed="exceedHandler"
-      :limit="maxCount"
+      :limit="1"
       :auto-upload="false">
       <i class="el-icon-plus"></i>
     </el-upload>
@@ -26,17 +26,15 @@
   import {policy} from "@/api/oss";
 
   export default {
-    name: "multiUpload",
+    name: "singleUpload",
     props: {
-      //图片属性数组
-      value: Array,
-      //最大上传图片数量
-      maxCount:{
-        type:Number,
-        default:5
+      value: String,
+      isUpload: {
+        type: Boolean,
+        default: false
       }
     },
-    data(){
+    data() {
       return {
         dataObj: {
           policy: '',
@@ -47,32 +45,25 @@
           host: ''
         },
         dialogVisible: false,
-        dialogImageUrl:null,
-        useOss:true,  //true为oss，false为minio
-        ossUploadUrl:'http://qlmusic-oss1.oss-cn-zhangjiakou.aliyuncs.com',
-        minioUploadUrl:'http://localhost:8080/minio/upload',
+        dialogImageUrl: null,
+        useOss: true, //true为oss，false为minio
+        ossUploadUrl: 'http://qlmusic-oss1.oss-cn-zhangjiakou.aliyuncs.com',
+        minioUploadUrl: 'http://localhost:8080/minio/upload',
       }
     },
-    computed:{
+    computed: {
       fileList() {
-        let fileList=[];
-        console.log(fileList);
-        return fileList;
+        if (this.value !== undefined && this.value !== '' && this.value !== null)
+          if (this.isUpload) return [{url: this.value}]
       }
     },
-    methods:{
-      submit(){
-        this.$refs.multiUpload.submit()
+    methods: {
+      submit() {
+        this.$refs.singleUpload.submit()
       },
-      emitInput(fileList) {
-        let value=[];
-        for(let i=0;i<fileList.length;i++){
-          value.push(fileList[i].url);
-        }
-      },
-      changeHandler(file){
+      changeHandler(file) {
         let _self = this;
-        if(!this.useOss){
+        if (!this.useOss) {
           //不使用oss不需要获取策略
           return true;
         }
@@ -85,7 +76,7 @@
             _self.dataObj.key = data.dir + '/${filename}';
             _self.dataObj.dir = data.dir;
             _self.dataObj.host = data.host;
-            this.$emit('input',data.host + '/' + data.dir + '/' + file.name)
+            this.$emit('input', data.host + '/' + data.dir + '/' + file.name)
             resolve(true)
           }).catch(err => {
             console.log(err)
@@ -94,30 +85,24 @@
         })
       },
       removeHandler(file, fileList) {
-        this.emitInput(fileList);
+        console.log(file);
+        console.log(this.value);
       },
       previewHandler(file) {
         this.dialogVisible = true;
-        this.dialogImageUrl=file.url;
+        this.dialogImageUrl = file.url;
       },
-      beforeUpload(file) {
-        console.log('beforeUpload');
-
+      beforeUploadHandler() {
+        console.log('beforeUploadHandler');
       },
-      uploadSuccessHandler(res, file) {
-        let url = this.dataObj.host + '/' + this.dataObj.dir + '/' + file.name;
-        if(!this.useOss){
-          //不使用oss直接获取图片路径
-          url = res.data.url;
-        }
-        this.fileList.push({name: file.name,url:url});
-        this.emitInput(this.fileList);
+      uploadSuccessHandler() {
+        console.log('uploadSuccessHandler');
       },
-      exceedHandler(files, fileList) {
+      exceedHandler() {
         this.$message({
-          message: '最多只能上传'+this.maxCount+'张图片',
+          message: '最多只能上传1张图片',
           type: 'warning',
-          duration:1000
+          duration: 1200
         });
       }
     }

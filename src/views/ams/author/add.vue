@@ -14,23 +14,26 @@
     <author-upload-form
       v-show="showStatus[1]"
       v-model="addAuthor"
+      :is-upload="isUpdate"
       @prevStep="prevStep"
-      @commit="commit">
+      @commitHandler="commitHandler">
     </author-upload-form>
   </el-card>
 </template>
 
 <script>
+  import {add,getAuthor,updateAuthor} from "@/api/author";
   import AuthorInfoForm from './compoents/authorInfoForm'
   import AuthorUploadForm from './compoents/authorUploadForm'
 
   const defaultAddAuthor = {
-    name: null,
-    sex: null,
-    type: [],
-    prefix: null,
-    language: null,
-    description: null,
+    name: '',
+    sex: '',
+    tag: '',
+    prefix: '',
+    language: '',
+    description: '',
+    headIcon:''
   }
   export default {
     name: "addAuthor",
@@ -41,7 +44,7 @@
     data() {
       return {
         active: 0,
-        isShow: true,
+        isUpdate: false,
         showStatus: [true, false],
         addAuthor: Object.assign({}, defaultAddAuthor),
       }
@@ -67,9 +70,55 @@
           this.showStatus[this.active] = true
         }
       },
-      commit() {
-        console.log(this.addAuthor);
+      tagToString(){
+        this.addAuthor.tag = this.addAuthor.tag.join('、')
       },
+      tagToArray(){
+        this.addAuthor.tag = this.addAuthor.tag.split('、')
+      },
+      commitHandler() {
+        console.log(this.addAuthor);
+        this.$confirm('是否要提交该歌手', '提示', {
+          cancelButtonText: '取消',
+          confirmButtonText: '确定',
+          type: 'warning'
+        }).then(() => {
+          this.tagToString()
+          if(this.isUpdate){
+            updateAuthor(this.$route.query.id,this.addAuthor).then(() => {
+              this.$message({
+                type: 'success',
+                message: '修改成功',
+                duration:1200
+              });
+              this.$router.back()
+            })
+          }else {
+            add(this.addAuthor).then(response => {
+              this.$message({
+                type: 'success',
+                message: '提交成功',
+                duration:1200
+              });
+              this.$refs.elUpload.submit()
+            })
+          }
+        })
+      },
+    },
+    created(){
+      let id = this.$route.query.id
+      if(typeof id !=='undefined') {
+        this.isUpdate = true
+      }
+      if(this.isUpdate){
+        getAuthor(id).then(response => {
+          let data = response.data
+          this.addAuthor = data
+          console.log(this.addAuthor);
+          this.tagToArray()
+        })
+      }
     }
   }
 </script>

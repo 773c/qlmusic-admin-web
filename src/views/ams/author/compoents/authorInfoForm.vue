@@ -1,5 +1,5 @@
 <template>
-  <info-form :model="value" v-model="value" :rules="rules" ref="infoForm" @nextStep="nextStep" style="margin-top: 40px">
+  <info-form :model="value" v-model="value"  ref="infoForm" @nextStep="nextStep" style="margin-top: 40px">
     <template #one>
       <el-form-item label="歌手姓名：" prop="name">
         <el-input type="text" v-model="value.name"></el-input>
@@ -19,7 +19,7 @@
     </template>
     <template #three>
       <el-form-item label="歌手类型：" prop="type">
-        <el-select v-model="value.type" multiple placeholder="请选择">
+        <el-select v-model="value.tag" multiple placeholder="请选择">
           <el-option
             v-for="item in typeOptions"
             :key="item.value"
@@ -75,10 +75,10 @@
       return {
         sexOptions: [
           {
-            value: '1',
+            value: '男',
             label: '男'
           }, {
-            value: '2',
+            value: '女',
             label: '女'
           }, {
             value: '3',
@@ -87,54 +87,54 @@
         ],
         languageOptions: [
           {
-            value: 1,
+            value: '华语',
             label: '华语'
           },
           {
-            value: 2,
+            value: '欧美',
             label: '欧美'
           },
           {
-            value: 3,
+            value: '韩国',
             label: '韩国'
           }, {
-            value: 4,
+            value: '日本',
             label: '日本'
           }, {
-            value: 5,
+            value: '其他',
             label: '其他'
           }
         ],
         typeOptions: [
           {
-            value: '选项1',
+            value: '摇滚',
             label: '摇滚'
           }, {
-            value: '选项2',
+            value: '流行',
             label: '流行'
           }, {
-            value: '选项3',
+            value: '电子',
             label: '电子'
           }, {
-            value: '选项4',
+            value: '民谣',
             label: '民谣'
           }, {
-            value: '选项5',
+            value: '古典',
             label: '古典'
           }, {
-            value: '选项6',
+            value: '说唱',
             label: '说唱'
           }, {
-            value: '选项7',
+            value: '布鲁斯',
             label: '布鲁斯'
           }, {
-            value: '选项8',
+            value: '轻音乐',
             label: '轻音乐'
           }, {
-            value: '选项9',
+            value: '雷鬼',
             label: '雷鬼'
           }, {
-            value: '选项10',
+            value: '蓝调',
             label: '蓝调'
           }
         ],
@@ -145,7 +145,7 @@
           sex: [
             {required: true, message: '请选择歌手性别', trigger: 'blur'}
           ],
-          type: [
+          tag: [
             {required: true, message: '请选择歌手类型', trigger: 'blur'}
           ],
           prefix: [
@@ -157,6 +157,9 @@
         }
       }
     },
+    computed:{
+
+    },
     methods:{
       nextHandler(){
         this.$refs.infoForm.nextHandler()
@@ -166,8 +169,9 @@
       },
       nextStep(){
         this.$emit('nextStep')
-      }
+      },
     }
+
   }
 </script>
 

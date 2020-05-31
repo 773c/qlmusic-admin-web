@@ -84,7 +84,7 @@
       <span> 数据列表</span>
       <el-button
         class="btn-add"
-        @click=""
+        @click="addAuthorHandler"
         type="danger"
         plain
         size="mini">
@@ -101,7 +101,7 @@
         <el-table-column label="编号" width="60" align="center">
           <template #default="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="歌手头像" width="100" align="center">
+        <el-table-column label="歌手头像" width="120" align="center">
           <template #default="scope"><img style="height: 80px" :src="scope.row.headIcon"></template>
         </el-table-column>
         <el-table-column label="歌手姓名" width="160" align="center">
@@ -114,16 +114,26 @@
             <p>{{scope.row.sex}}</p>
           </template>
         </el-table-column>
-        <el-table-column label="描述" align="center">
-          <template #default="scope">{{scope.row.description}}</template>
+        <el-table-column label="描述" width="140" align="center">
+          <template #default="scope">
+            <el-popover trigger="hover" placement="top" width="400">
+              <div>
+                {{scope.row.description}}
+              </div>
+              <div slot="reference" class="name-wrapper">
+                <el-button type="danger" icon="el-icon-chat-line-round" circle></el-button>
+              </div>
+            </el-popover>
+
+          </template>
         </el-table-column>
-        <el-table-column label="标签" width="160" align="center">
+        <el-table-column label="标签" align="center">
           <template #default="scope">{{scope.row.tag}}</template>
         </el-table-column>
         <el-table-column label="首字母" width="70" align="center">
           <template #default="scope">{{scope.row.prefix}}</template>
         </el-table-column>
-        <el-table-column label="粉丝数量" width="120" align="center">
+        <el-table-column label="粉丝数量" width="140" align="center">
           <template #default="scope">{{scope.row.fansSum}}</template>
         </el-table-column>
         <el-table-column label="语种" width="80" align="center">
@@ -142,7 +152,7 @@
                 size="mini"
                 type="danger"
                 plain
-                @click="handleUpdateProduct(scope.$index, scope.row)">编辑
+                @click="updateAuthorHandler(scope.$index, scope.row)">编辑
               </el-button>
             </p>
             <p>
@@ -194,7 +204,6 @@
     name: "authorList",
     data() {
       return {
-        value:null,
         editSkuInfo: {
           dialogVisible: false,
           productId: null,
@@ -271,6 +280,13 @@
         this.listQuery.pageNum = 1
         this.listQuery.pageSize = val
         this.authorList()
+      },
+      addAuthorHandler(){
+        this.$router.push('/ams/addAuthor')
+      },
+      updateAuthorHandler(index,row){
+        console.log(index);
+        this.$router.push({path:'/ams/updateAuthor',query:{id:row.id}})
       }
     },
     created() {

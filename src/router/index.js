@@ -51,6 +51,12 @@ const constantRouterMap = [
         name: 'authorCate',
         component:AuthorCate,
         meta:{title:"歌手分类",icon:'gsfl'}
+      },
+      {
+        path:'updateAuthor',
+        name:'updateAuthor',
+        component:AddAuthor,
+        meta:{title:"修改歌手",icon:'xggs'}
       }
     ]
   }
