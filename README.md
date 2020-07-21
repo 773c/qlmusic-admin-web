@@ -1,4 +1,4 @@
-# qlmusic-admin-web
+# qlemusic-admin-web
 
 ## Project setup
 ```
